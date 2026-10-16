@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>今天吃什麼？｜幸運餐點轉盤</title>
+  <style>
+    :root{--ink:#704737;--accent:#f47762;--accent2:#ffba70;--cream:#fff9ef;--card:#fffdfa;--muted:#967d6e;--line:#f2dcc6;--shadow:0 12px 32px #a7755221;font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,#ffe2d9 0,transparent 30%),radial-gradient(circle at 90% 25%,#fff0bd 0,transparent 38%),var(--cream);color:var(--ink);min-height:100vh}button,input{font:inherit}button{cursor:pointer;border:0}button:disabled{opacity:.5;cursor:not-allowed}.wrap{max-width:1040px;margin:auto;padding:25px 18px 54px}.header{text-align:center;margin:20px 0 26px}.header .eyebrow{font-size:.82rem;font-weight:800;letter-spacing:.14em;color:var(--accent)}h1{font-size:clamp(2.1rem,6vw,3.5rem);margin:8px 0;color:#7e493b}.header p{margin:0;color:var(--muted)}.layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,1fr);gap:22px;align-items:start}.panel{background:var(--card);border:2px solid #fff;box-shadow:var(--shadow);border-radius:28px;padding:24px}.wheel-panel{text-align:center}.section-title{font-weight:900;font-size:1.18rem;margin:0 0 15px}.wheel-holder{width:min(100%,425px);aspect-ratio:1;position:relative;margin:0 auto 12px}.wheel-holder canvas{width:100%;height:100%;display:block;filter:drop-shadow(0 6px 2px #b9684030)}.pointer{position:absolute;top:-7px;left:50%;transform:translateX(-50%);z-index:2;width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-top:33px solid #cf503f;filter:drop-shadow(0 2px 1px #7d4230aa)}.primary{background:linear-gradient(135deg,#ff9478,#ed6756);color:white;box-shadow:0 6px 0 #d85e4e;padding:13px 25px;border-radius:999px;font-weight:900;min-height:48px}.primary:enabled:active{transform:translateY(3px);box-shadow:0 3px 0 #d85e4e}.secondary{background:#fff0df;color:#92523c;padding:11px 18px;border-radius:15px;font-weight:800}.danger{background:#ffedea;color:#c35045}.buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.status{min-height:24px;margin:14px 0 0;color:var(--muted);font-weight:600}.result{background:#fff1d7;border:2px dashed #f0be86;border-radius:18px;margin-top:17px;padding:16px;display:none}.result.show{display:block}.result .meal{font-size:1.65rem;font-weight:900;margin:4px 0 12px;color:#aa5c32}.side{display:grid;gap:20px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.panel-head .section-title{margin:0}.small{font-size:.86rem;color:var(--muted)}.manage-body{margin-top:18px}.hidden{display:none!important}.add-row{display:flex;gap:8px}.add-row input{flex:1;min-width:0;padding:12px;border:2px solid var(--line);border-radius:13px;outline-color:var(--accent);background:#fff}.list{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px;max-height:340px;overflow:auto}.list li{background:#fff6ea;padding:8px 10px 8px 14px;border-radius:13px;display:flex;align-items:center;gap:8px;justify-content:space-between}.list .label{overflow-wrap:anywhere;min-width:0;flex:1}.mini{padding:6px 9px;border-radius:9px;background:white;color:#935940;font-weight:700}.mini.remove{color:#c34e47}.row-actions{display:flex;gap:5px;flex-shrink:0}.history{padding:0;margin:14px 0 0;list-style:none;max-height:420px;overflow:auto}.history li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #f3e4d4;padding:10px 2px}.history li:last-child{border-bottom:0}.history time{font-size:.77rem;color:var(--muted);white-space:nowrap}.footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:30px}.note{font-size:.79rem;color:var(--muted);margin:9px 0 0}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#7c4b40;color:#fff;border-radius:14px;padding:12px 18px;box-shadow:var(--shadow);z-index:10;max-width:calc(100% - 28px);text-align:center}.toast[hidden]{display:none}.muted{color:var(--muted)}@media(max-width:750px){.layout{grid-template-columns:1fr}.panel{padding:19px}.wrap{padding:18px 12px 38px}.wheel-holder{max-width:375px}.header{margin:11px 0 21px}.history li{align-items:flex-start;flex-direction:column;gap:3px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="header"><div class="eyebrow">✦ FOOD LUCKY WHEEL ✦</div><h1>🍔 今天吃什麼？</h1><p>選擇困難？交給幸運轉盤吧！ ✨</p></header>
+  <div class="layout">
+    <section class="panel wheel-panel" aria-labelledby="wheel-title">
+      <h2 class="section-title" id="wheel-title">🍴 美食幸運轉盤</h2>
+      <div class="wheel-holder"><div class="pointer" aria-hidden="true"></div><canvas id="wheel" width="800" height="800" role="img" aria-label="隨機餐點轉盤"></canvas></div>
+      <div class="buttons"><button class="primary" id="spin">🎯 開始抽選！</button></div>
+      <p class="status" id="status" aria-live="polite">準備好讓命運決定今天的餐點了嗎？</p>
+      <div class="result" id="result" aria-live="polite"><div>🎉 今天就吃……</div><div class="meal" id="result-meal"></div><button class="secondary" id="again">🔄 再抽一次</button></div>
+    </section>
+    <div class="side">
+      <section class="panel" aria-labelledby="manage-title">
+        <div class="panel-head"><h2 class="section-title" id="manage-title">📝 餐點管理 <span class="small" id="count"></span></h2><button class="secondary" id="toggle" aria-expanded="false" aria-controls="manage-body">展開管理 ＋</button></div>
+        <div id="manage-body" class="manage-body hidden">
+          <form id="add-form" class="add-row"><input id="meal-input" type="text" maxlength="15" placeholder="輸入餐點名稱 (最多15字)" aria-label="餐點名稱" autocomplete="off"/><button class="secondary" type="submit">新增</button></form>
+          <p class="note">餐點名稱不可空白或重複；抽選至少需要 2 種餐點。</p>
+          <ul id="meals-list" class="list"></ul>
+          <button class="secondary danger" id="reset" type="button">↩ 恢復預設 10 種餐點</button>
+        </div>
+      </section>
+      <section class="panel" aria-labelledby="history-title"><div class="panel-head"><h2 class="section-title" id="history-title">🕘 抽選歷史</h2><button class="secondary danger" id="clear">清除紀錄</button></div><p class="note">自動保留最近 20 筆抽選結果</p><ul class="history" id="history-list"></ul></section>
+    </div>
+  </div>
+  <footer class="footer">Made with ♡ ｜ 今天吃什麼？・Vibe Coding Project</footer>
+</main>
+<div id="toast" class="toast" role="alert" hidden></div>
+<script>
+(()=>{'use strict';
+ const DEFAULTS=['牛肉麵','拉麵','火鍋','壽司','披薩','漢堡','咖哩飯','水餃','義大利麵','滷肉飯'];
+ const MEALS_KEY='food-wheel-meals-v1',HISTORY_KEY='food-wheel-history-v1';
+ const $=id=>document.getElementById(id);
+ const canvas=$('wheel'),ctx=canvas.getContext('2d');
+ const colors=['#ffb3a2','#ffe18a','#b8e5c1','#b7dffd','#dbc4f4','#ffcfaa','#f6bcd5','#c7dfaa','#fbe59f','#aecfef'];
+ let meals=read(MEALS_KEY,DEFAULTS),history=read(HISTORY_KEY,[]),busy=false,angle=0,lastFrame=0;
+ if(!Array.isArray(meals)||!meals.every(x=>typeof x==='string')) meals=[...DEFAULTS];
+ meals=meals.map(x=>x.trim()).filter(x=>x.length>0&&Array.from(x).length<=15);
+ meals=[...new Set(meals)];
+ if(!Array.isArray(history))history=[];
+ history=history.filter(x=>x&&typeof x.meal==='string'&&typeof x.time==='number').slice(0,20);
+ function read(key,fallback){try{const value=localStorage.getItem(key);return value===null?[...fallback]:JSON.parse(value)}catch{return [...fallback]}}
+ let warned=false;
+ function save(){try{localStorage.setItem(MEALS_KEY,JSON.stringify(meals));localStorage.setItem(HISTORY_KEY,JSON.stringify(history))}catch{if(!warned){warned=true;notify('無法儲存到瀏覽器，本次操作仍可使用，但關閉後可能遺失資料。')}}}
+ let toastTimeout;function notify(message){const el=$('toast');el.textContent=message;el.hidden=false;clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>{el.hidden=true},3400)}
+ function draw(){const size=canvas.width,center=size/2,radius=376;ctx.clearRect(0,0,size,size);ctx.save();ctx.translate(center,center);ctx.rotate(angle);const n=meals.length;
+  if(!n){ctx.beginPath();ctx.arc(0,0,radius,0,Math.PI*2);ctx.fillStyle='#f7e7d8';ctx.fill();ctx.fillStyle='#946f5b';ctx.font='bold 38px system-ui';ctx.textAlign='center';ctx.fillText('請先新增餐點 🍴',0,10)}
+  else{const step=Math.PI*2/n;for(let i=0;i<n;i++){const start=-Math.PI/2-step/2+i*step,end=start+step;ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,radius,start,end);ctx.closePath();ctx.fillStyle=colors[i%colors.length];ctx.fill();ctx.lineWidth=5;ctx.strokeStyle='#fffdf7';ctx.stroke();ctx.save();ctx.rotate(-Math.PI/2+i*step);ctx.translate(radius*.66,0);ctx.rotate(Math.PI/2);ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#694235';const label=meals[i];const maxFont=Math.min(30,Math.max(13,50-Math.max(0,Array.from(label).length-4)*4));ctx.font=`bold ${Math.min(maxFont,n>15?17:n>10?23:30)}px system-ui`;const chars=Array.from(label);const maxChars=n>12?4:6;if(chars.length>maxChars){ctx.fillText(chars.slice(0,maxChars).join(''),0,-13);ctx.fillText(chars.slice(maxChars,maxChars*2).join(''),0,17)}else ctx.fillText(label,0,0);ctx.restore()}}
+  ctx.beginPath();ctx.arc(0,0,51,0,Math.PI*2);ctx.fillStyle='#fffefa';ctx.fill();ctx.lineWidth=9;ctx.strokeStyle='#f1a76a';ctx.stroke();ctx.fillStyle='#a45d43';ctx.font='bold 34px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🍴',0,3);ctx.restore();}
+ function refresh(){draw();$('count').textContent=`(${meals.length} 種)`;$('spin').disabled=busy||meals.length<2;$('again').disabled=busy||meals.length<2;$('clear').disabled=busy||!history.length;$('reset').disabled=busy;$('toggle').disabled=busy;$('meal-input').disabled=busy;document.querySelector('#add-form button').disabled=busy;renderMeals();renderHistory();if(meals.length<2&&!busy){$('status').textContent='⚠️ 至少需要 2 種餐點，請先新增！'}}
+ function renderMeals(){const list=$('meals-list');list.replaceChildren();if(!meals.length){const li=document.createElement('li');li.textContent='目前沒有餐點，新增喜歡的美食吧！';list.append(li)}meals.forEach((meal,i)=>{const li=document.createElement('li'),label=document.createElement('span'),actions=document.createElement('span'),edit=document.createElement('button'),remove=document.createElement('button');label.className='label';label.textContent=`${i+1}. ${meal}`;actions.className='row-actions';edit.className='mini';edit.textContent='編輯';edit.disabled=busy;edit.onclick=()=>editMeal(i);remove.className='mini remove';remove.textContent='刪除';remove.disabled=busy;remove.onclick=()=>{if(busy)return;meals.splice(i,1);save();$('result').classList.remove('show');refresh()};actions.append(edit,remove);li.append(label,actions);list.append(li)})}
+ function renderHistory(){const el=$('history-list');el.replaceChildren();if(!history.length){const li=document.createElement('li');li.className='muted';li.textContent='目前還沒有抽選紀錄喔！';el.append(li);return}history.forEach(item=>{const li=document.createElement('li'),meal=document.createElement('strong'),time=document.createElement('time');meal.textContent=`🍽️ ${item.meal}`;time.dateTime=new Date(item.time).toISOString();time.textContent=new Date(item.time).toLocaleString('zh-TW',{dateStyle:'short',timeStyle:'short'});li.append(meal,time);el.append(li)})}
+ function validate(value,exclude=-1){const name=value.trim();if(!name)return'請輸入餐點名稱！';if(Array.from(name).length>15)return'餐點名稱不能超過 15 個字！';if(meals.some((x,i)=>i!==exclude&&x.toLocaleLowerCase()===name.toLocaleLowerCase()))return'這個餐點已經存在囉！';return null}
+ $('add-form').addEventListener('submit',e=>{e.preventDefault();if(busy)return;const input=$('meal-input'),error=validate(input.value);if(error){notify(error);return}meals.push(input.value.trim());input.value='';save();refresh();notify('餐點新增成功！')});
+ function editMeal(index){if(busy)return;const old=meals[index];const next=prompt('修改餐點名稱（最多 15 字）',old);if(next===null)return;const error=validate(next,index);if(error){notify(error);return}meals[index]=next.trim();save();$('result').classList.remove('show');refresh();notify('餐點修改成功！')}
+ $('toggle').addEventListener('click',()=>{const body=$('manage-body'),opening=body.classList.contains('hidden');body.classList.toggle('hidden');$('toggle').textContent=opening?'收起管理 −':'展開管理 ＋';$('toggle').setAttribute('aria-expanded',String(opening))});
+ $('reset').addEventListener('click',()=>{if(busy||!confirm('確定恢復預設 10 種餐點嗎？目前自訂的餐點清單會被取代，歷史紀錄則會保留。'))return;meals=[...DEFAULTS];$('result').classList.remove('show');save();refresh();$('status').textContent='餐點清單已恢復預設！';notify('已恢復 10 種預設餐點')});
+ $('clear').addEventListener('click',()=>{if(busy||!history.length||!confirm('確定要清除所有抽選紀錄嗎？這個操作無法復原。'))return;history=[];save();refresh();notify('歷史紀錄已清除')});
+ function spin(){if(busy)return;if(meals.length<2){notify('至少需要 2 種餐點才能抽選！');return}busy=true;$('result').classList.remove('show');$('status').textContent='✨ 命運的轉盤正在旋轉……';refresh();const n=meals.length,chosen=Math.floor(Math.random()*n),step=Math.PI*2/n,full=Math.PI*2,duration=3000+Math.random()*2000;
+  // Sector i is centered at -PI/2 + i*step before rotation; pointer is at -PI/2.
+  // So final rotation satisfies angle + chosen*step = 0 (mod 2PI).
+  const current=((angle%full)+full)%full,target=(( -chosen*step%full)+full)%full,delta=((target-current+full)%full)+full*(5+Math.floor(Math.random()*3)),startAngle=angle,start=performance.now();
+  function frame(now){const t=Math.min(1,(now-start)/duration),ease=1-Math.pow(1-t,4);angle=startAngle+delta*ease;draw();if(t<1){lastFrame=requestAnimationFrame(frame)}else{angle=startAngle+delta;busy=false;const selected=meals[chosen];history.unshift({meal:selected,time:Date.now()});history=history.slice(0,20);save();$('result-meal').textContent=selected;$('result').classList.add('show');$('status').textContent='🎊 選好啦！祝你用餐愉快！';refresh()}}
+  lastFrame=requestAnimationFrame(frame)}
+ $('spin').addEventListener('click',spin);$('again').addEventListener('click',spin);
+ refresh();if(meals.length>=2)$('status').textContent='準備好讓命運決定今天的餐點了嗎？';
+})();
+</script>
+</body>
+</html>
